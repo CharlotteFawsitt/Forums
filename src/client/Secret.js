@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Forum from "./Forum";
 
 export default class Secret extends Component {
   constructor() {
     super();
     this.state = {
-      message: 'Loading...'
+
     };
   }
 
@@ -15,10 +16,17 @@ export default class Secret extends Component {
   }
 
   render() {
+    const forumList = this.props.forums.map((f, i) => (
+      <forumList
+        key={f._id}
+        id={f._id}
+        name={f.name}
+        email={f.email}
+        />
+    ));
     return (
       <div>
-        <h1>Secret</h1>
-        <p>{this.state.message}</p>
+        <div>{forumList}</div>
       </div>
     );
   }

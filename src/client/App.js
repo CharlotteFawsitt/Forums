@@ -15,6 +15,8 @@ class App extends Component {
     this.login = this.login.bind(this);
   }
 
+
+
   logout(props) {
     axios.get('api/logout')
       .then(res => {
