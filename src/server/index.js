@@ -5,6 +5,7 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const User = require('./models/User');
+const Forums = require('./models/Forums');
 const withAuth = require('./middleware');
 
 const app = express();
@@ -29,6 +30,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/api/forums', function(req, res){
+  Forums.find({}, function(err, data){
+    console.log(data);
+    if (err) throw err;
+    res.send(data);
+  });
 });
 
 app.get('/api/home', function(req, res) {
@@ -99,4 +108,4 @@ app.get('/api/logout', withAuth, function(req, res) {
   res.cookie('token', '', { httpOnly: true }).sendStatus(200);;
 });
 
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 5000);

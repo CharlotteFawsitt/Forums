@@ -1,5 +1,5 @@
 {
-  "name": "mern-full-stack-auth-state",
+  "name": "CA2",
   "version": "1.0.0",
   "description": "Demo Full Stack MongoDB, Express, React & Node",
   "main": "src/server/index.js",
@@ -11,7 +11,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "echo Skip build on Heroku"
   },
-  "author": "Andrew Errity",
+  "author": "Charlotte Fawsitt",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
@@ -21,7 +21,7 @@
     "express": "^4.16.3",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.1.13",
-    "mongoose": "^5.4.19",
+    "mongoose": "^5.4.21",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-router-dom": "^4.3.1"

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Forum from "./Forum";
+import ForumList from './ForumList';
 
 export default class Secret extends Component {
   constructor() {
@@ -10,10 +10,7 @@ export default class Secret extends Component {
     };
   }
 
-  componentDidMount() {
-    axios.get('/api/secret')
-      .then(response => this.setState({message: response.data}));
-  }
+
 
   render() {
     const forumList = this.props.forums.map((f, i) => (
