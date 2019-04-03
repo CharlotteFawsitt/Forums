@@ -11,7 +11,7 @@ class ForumList extends Component {
   }
 
   componentDidMount() {
-    axios.get('api/forums')
+    axios.get('api/forum')
     .then(response => {
       this.setState({Forums: response.data});
       console.log(response.data);
@@ -23,10 +23,10 @@ class ForumList extends Component {
 
   render() {
     const forumList = this.state.Forums.map(u => (
-      <forumList
+      <Forum
         key={u._id}
         id={u._id}
-        name={u.name}
+        forumName={u.name}
         />
     ));
 

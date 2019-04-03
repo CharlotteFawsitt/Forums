@@ -8,7 +8,7 @@ render() {
       <div>
         <p>{this.props.forumName}</p>
 
-        <Link to={`/Forum/${this.props.id}`}>
+        <Link to={`/forum/${this.props.id}`}>
           <button type="button">
             View posts on this forum
           </button>

@@ -6,6 +6,8 @@ import Secret from './Secret';
 import Login from './Login';
 import Register from './Register';
 import ForumList from './ForumList';
+import PostList from './PostList';
+import CreatePost from './CreatePost';
 import axios from 'axios';
 
 class App extends Component {
@@ -38,7 +40,7 @@ class App extends Component {
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/secret">Secret</Link></li>
-          <li><Link to="/forums">Forums</Link></li>
+          <li><Link to="/forum">Forums</Link></li>
           {!this.state.loggedIn && <li><Link to="/login">Login</Link></li>}
           {!this.state.loggedIn && <li><Link to="/register">Register</Link></li>}
           {this.state.loggedIn && <li><Link to="/logout">Logout</Link></li>}
@@ -48,7 +50,9 @@ class App extends Component {
           <Route path="/" exact component={Home} />
           <Route path="/secret" component={withAuth(Secret)} />
           <Route path="/register" component={Register} />
-          <Route path="/forums" component={ForumList} />
+          <Route exact path="/forum" component={ForumList} />
+          <Route exact path="/forum/:id" component={PostList} />
+          <Route path="/forum/:id/createPost" component={CreatePost} />
           <Route path="/login" render={(props) => <Login {...props} handleLogin={this.login} />} />
           <Route path="/logout" render={this.logout}/>
         </Switch>
