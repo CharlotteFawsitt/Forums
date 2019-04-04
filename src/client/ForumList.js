@@ -7,7 +7,7 @@ class ForumList extends Component {
   constructor(props){
     super(props);
 
-    this.state = {Forums: []};
+    this.state = {Forums: [], currentUser: ''};
   }
 
   componentDidMount() {
@@ -20,6 +20,7 @@ class ForumList extends Component {
     .catch(error => {
       console.log(error);
     });
+
   }
 
   render() {
@@ -34,7 +35,9 @@ class ForumList extends Component {
     return(
       <div>
       <h2>Forums</h2>
-        <div>{forumList}</div>
+        <div>
+          <div>{forumList}</div>
+        </div>
     </div>
   );
   }

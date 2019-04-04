@@ -44,10 +44,6 @@ app.get('/api/home', function(req, res) {
   res.send('Welcome!');
 });
 
-app.get('/api/secret', withAuth, function(req, res) {
-  res.send('The password is potato');
-});
-
 app.get('/api/forum/:id/posts', function(req, res){
   Forum.findOne({_id: req.params.id}, function(err, data){
     if (err) throw err;
@@ -58,6 +54,33 @@ app.get('/api/forum/:id/posts', function(req, res){
       console.log(posts);
       res.send(posts);
     });
+  });
+});
+
+
+app.get('/api/posts/:id', function(req, res){
+  Post.findOne({_id: req.params.id}, function(err,data){
+    if (err) throw err;
+    res.send(data);
+  });
+});
+app.put('/api/posts/:id/editPost',(req, res) => {
+  const id = req.params.id;
+
+  Post.updateOne({_id: id}, {$set: req.body}, (err, result) => {
+    if (err) throw err;
+
+    console.log('Updated post in database');
+    return res.send({success: true});
+  })
+})
+
+app.delete('/api/forum/:id/posts/delete', (req, res) => {
+  Post.deleteOne({_id: req.body.id}, err => {
+    if (err) return res.send(err);
+
+    console.log('deleted from database');
+    return res.send({success: true});
   });
 });
 
@@ -88,18 +111,6 @@ app.post('/api/register', function(req, res) {
   });
 });
 
-app.post('/api/insertPost', function(req, res ){
-  const {name, forum_id} = req.body;
-  const post = new Post({name, forum_id});
-  post.save(function(err){
-    if (err){
-      console.log(err);
-      res.status(500).send('Error creating new post');
-    } else {
-      res.status(200).send('Post added');
-    }
-  });
-});
 
 app.post('/api/authenticate', function(req, res) {
   const { email, password } = req.body;
@@ -147,7 +158,8 @@ app.get('/api/checkToken', withAuth, function(req, res) {
 
 
 app.get('/api/logout', withAuth, function(req, res) {
-  res.cookie('token', '', { httpOnly: true }).sendStatus(200);;
+  res.cookie('token', '', { httpOnly: true });
+  res.status(200).send()
 });
 
 app.listen(process.env.PORT || 5000);

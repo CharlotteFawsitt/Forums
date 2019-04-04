@@ -5,8 +5,11 @@ import axios from 'axios';
 class CreatePost extends Component {
   constructor(props) {
     super(props);
-    this.state={name: '', user_id: this.props.history.state._id, user_email: this.props.history.state.email}
-
+    if(this.props.history.state){
+      this.state={name: '', user_id: this.props.history.state._id, user_email: this.props.history.state.email};
+    } else {
+      this.state={name: '', user_id: '', user_email: ''};
+    }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
