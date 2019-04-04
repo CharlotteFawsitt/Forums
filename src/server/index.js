@@ -55,16 +55,16 @@ app.get('/api/forum/:id/posts', function(req, res){
     Post.find({forum_id: data._id}, function(err, posts){
       if (err) throw err;
 
-      console.log("test");
+      console.log(posts);
       res.send(posts);
     });
   });
 });
 
-app.post('/api/forum/:id/createPost', function(req, res) {
-  const {name} =req.body;
+app.post('/api/forum/:id/createPost', withAuth, function(req, res) {
+  const {name, user_id, user_email} =req.body;
   const forum_id = req.params.id;
-  const post = new Post({name, forum_id });
+  const post = new Post({name, forum_id, user_id, user_email });
   post.save(function(err) {
     if (err) {
       console.log(err);
@@ -133,7 +133,8 @@ app.post('/api/authenticate', function(req, res) {
           const token = jwt.sign(payload, secret, {
             expiresIn: '1h'
           });
-          res.cookie('token', token, { httpOnly: true }).sendStatus(200);
+          res.cookie('token', token, { httpOnly: true });
+          res.status(200).send(user);
         }
       });
     }

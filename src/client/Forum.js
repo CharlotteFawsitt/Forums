@@ -13,6 +13,7 @@ render() {
             View posts on this forum
           </button>
         </Link>
+        
       </div>
 
     </div>

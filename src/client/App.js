@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import withAuth from './withAuth';
 import Home from './Home';
-import Secret from './Secret';
 import Login from './Login';
 import Register from './Register';
 import ForumList from './ForumList';
@@ -39,7 +38,6 @@ class App extends Component {
       <div>
         <ul>
           <li><Link to="/">Home</Link></li>
-          <li><Link to="/secret">Secret</Link></li>
           <li><Link to="/forum">Forums</Link></li>
           {!this.state.loggedIn && <li><Link to="/login">Login</Link></li>}
           {!this.state.loggedIn && <li><Link to="/register">Register</Link></li>}
@@ -48,11 +46,10 @@ class App extends Component {
 
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/secret" component={withAuth(Secret)} />
           <Route path="/register" component={Register} />
           <Route exact path="/forum" component={ForumList} />
           <Route exact path="/forum/:id" component={PostList} />
-          <Route path="/forum/:id/createPost" component={CreatePost} />
+          <Route path="/forum/:id/createPost" component={withAuth(CreatePost)} />
           <Route path="/login" render={(props) => <Login {...props} handleLogin={this.login} />} />
           <Route path="/logout" render={this.logout}/>
         </Switch>
