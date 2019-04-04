@@ -38,7 +38,7 @@ class App extends Component {
   render() {
     return (
       <div className="columns">
-          <div className="column is-1 sidePanel">
+          <div className="column is-1">
             <aside className="menu">
               <ul className="menu-list">
                 <li><Link to="/">Home</Link></li>
@@ -49,7 +49,7 @@ class App extends Component {
               </ul>
             </aside>
           </div>
-          <div className="column is-four-fifths mainBody">
+          <div className="column is-four-fifths">
           <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/register" component={Register} />

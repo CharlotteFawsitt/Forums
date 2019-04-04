@@ -25,7 +25,6 @@ export default class Login extends Component {
     axios.post('/api/authenticate', this.state)
       .then(res => {
         if (res.status === 200) {
-          console.log(res.data);
           // run the login function in the parent component
           this.props.handleLogin();
           // redirect to /

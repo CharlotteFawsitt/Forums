@@ -16,7 +16,6 @@ class PostList extends Component {
   }
 
   updatePosts() {
-    console.log(this.props.history);
     axios.get(`/api/forum/${this.props.match.params.id}/posts`)
     .then(response => {
       this.setState({posts: response.data});
@@ -25,7 +24,6 @@ class PostList extends Component {
     } else {
       this.setState({user_id: ''});
     }
-      console.log(this.state.user_id);
     })
     .catch(error => {
       console.log(error);

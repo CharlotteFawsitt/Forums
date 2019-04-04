@@ -14,8 +14,6 @@ class ForumList extends Component {
     axios.get('api/forum')
     .then(response => {
       this.setState({Forums: response.data});
-      console.log(response.data);
-      console.log(this.props.history.state);
     })
     .catch(error => {
       console.log(error);

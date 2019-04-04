@@ -14,7 +14,6 @@ class EditPost extends Component {
   componentDidMount() {
     axios.get(`/api/posts/${this.props.match.params.id}`)
     .then(response => {
-      console.log(response.data);
       this.setState({
         name: response.data.name,
         email: response.data.user_email,
