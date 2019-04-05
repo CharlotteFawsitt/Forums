@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import {Link} from 'react-router-dom';
 import Forum from './Forum';
 import axios from 'axios';
@@ -27,17 +28,17 @@ class ForumList extends Component {
         key={u._id}
         id={u._id}
         forumName={u.name}
+        image={u.image}
         />
     ));
 
-    return(
+    return (
       <div>
-      <h2>Forums</h2>
+      <h2 className="title is-2">Forums</h2>
         <div>
           <div>{forumList}</div>
         </div>
-    </div>
-  );
+    </div>);
   }
 }
 

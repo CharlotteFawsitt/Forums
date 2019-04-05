@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const User = require('./models/User');
 const Forum = require('./models/Forum');
 const Post = require('./models/Post')
+const Comment = require('./models/Comment')
 const withAuth = require('./middleware');
 
 const app = express();
@@ -51,12 +52,33 @@ app.get('/api/forum/:id/posts', function(req, res){
     Post.find({forum_id: data._id}, function(err, posts){
       if (err) throw err;
 
-      console.log(posts);
       res.send(posts);
     });
   });
 });
 
+app.get('/api/posts/:id/comments', function(req, res){
+    Comment.find({post_id: req.params.id}, function(err, comments){
+      if (err) throw err;
+
+      res.send(comments);
+    });
+})
+
+app.get('/api/comments/:id', function(req, res) {
+  Comment.findOne({_id: req.params.id}, function(err, comments) {
+    if (err) throw err;
+    res.send(comments);
+  });
+});
+app.put('/api/comments/:id/editComment', function(req, res) {
+  Comment.updateOne({_id: req.params.id}, {$set: req.body}, (err, result) => {
+    if (err) throw err;
+
+    console.log('Updated comment in database');
+    return res.send({success: true});
+  })
+})
 
 app.get('/api/posts/:id', function(req, res){
   Post.findOne({_id: req.params.id}, function(err,data){
@@ -72,8 +94,8 @@ app.put('/api/posts/:id/editPost',(req, res) => {
 
     console.log('Updated post in database');
     return res.send({success: true});
-  })
-})
+  });
+});
 
 app.delete('/api/forum/:id/posts/delete', (req, res) => {
   Post.deleteOne({_id: req.body.id}, err => {
@@ -95,6 +117,29 @@ app.post('/api/forum/:id/createPost', withAuth, function(req, res) {
     } else {
       res.status(200).send('Post created')
     }
+  });
+});
+
+app.post('/api/posts/:id/createComment', withAuth, function(req, res){
+  const {name,user_id, user_email} = req.body;
+  const post_id = req.params.id;
+  const comment = new Comment({name, user_id, user_email, post_id});
+  comment.save(function(err) {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Error creating commment')
+    } else {
+      res.status(200).send('Comment created')
+    }
+  });
+});
+
+app.delete('/api/posts/:id/comments/delete', (req, res) => {
+  Comment.deleteOne({_id: req.body.id}, err => {
+    if (err) return res.send(err);
+
+    console.log('deleted from database');
+    return res.send({success: true});
   });
 });
 

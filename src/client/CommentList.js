@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-class PostList extends Component {
+class CommentList extends Component {
   constructor(props) {
     super(props);
-    this.state = { posts: [], user_id: "" };
+    this.state = { comments: [], user_id: "", posts: [] };
 
     this.updatePosts = this.updatePosts.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -17,9 +17,9 @@ class PostList extends Component {
 
   updatePosts() {
     axios
-      .get(`/api/forum/${this.props.match.params.id}/posts`)
+      .get(`/api/posts/${this.props.match.params.id}/comments`)
       .then(response => {
-        this.setState({ posts: response.data });
+        this.setState({ comments: response.data });
         if (this.props.history.state) {
           this.setState({ user_id: this.props.history.state._id });
         } else {
@@ -29,13 +29,22 @@ class PostList extends Component {
       .catch(error => {
         console.log(error);
       });
+
+      axios
+        .get(`/api/posts/${this.props.match.params.id}`)
+        .then(res => {
+          this.setState({ posts: res.data });
+        })
+        .catch(error => {
+          console.log(error);
+        });
   }
 
-  handleDelete(postId) {
+  handleDelete(CommentId) {
     axios
-      .delete(`/api/forum/${this.props.match.params.id}/posts/delete`, {
+      .delete(`/api/posts/${this.props.match.params.id}/comments/delete`, {
         data: {
-          id: postId
+          id: CommentId
         }
       })
       .then(response => {
@@ -47,34 +56,44 @@ class PostList extends Component {
   }
 
   render() {
-    const postList = this.state.posts.map(u => (
-      <Post
+    const commentList = this.state.comments.map(u => (
+      <Comment
         key={u._id}
         id={u._id}
         uid={u.user_id}
+        postId={u.post_id}
         name={u.name}
         email={u.user_email}
         currentUser={this.state.user_id}
         handleDelete={this.handleDelete}
-        forumid={this.props.match.params.id}
       />
     ));
+    const post =
+      <Post
+        key={this.state.posts._id}
+        id={this.state.posts._id}
+        name={this.state.posts.name}
+        email={this.state.posts.user_email}
+      />;
 
     return (
       <div className="column">
-        {postList.length ? (
+        <div>
+          {post}
+        </div>
+        {commentList.length ? (
           <div>
-            <h2>All Posts</h2>
-            <Link to={`/forum/${this.props.match.params.id}/createPost`}>
-              <button type="button">Create new post</button>
+            <h2>All Comments</h2>
+            <Link to={`/posts/${this.props.match.params.id}/createComment`}>
+              <button type="button">Create new Comment</button>
             </Link>
-            <div>{postList}</div>
+            <div>{commentList}</div>
           </div>
         ) : (
           <div>
-            <h2>No posts</h2>
-            <Link to={`/forum/${this.props.match.params.id}/createPost`}>
-              <button type="button">Create new post</button>
+            <h2>No Comments</h2>
+            <Link to={`/posts/${this.props.match.params.id}/createComment`}>
+              <button type="button">Create new Comment</button>
             </Link>
           </div>
         )}
@@ -83,7 +102,7 @@ class PostList extends Component {
   }
 }
 
-const Post = props => {
+const Comment = props => {
   return (
     <div className="card Cards">
       <div className="card-content is-4by3">
@@ -97,27 +116,37 @@ const Post = props => {
                 props.handleDelete(props.id);
               }}
             >
-              Delete post
+              Delete Comment
             </button>
           ) : (
             <div />
           )}
           {props.uid === props.currentUser ? (
-            <Link to={`/forum/${props.forumid}/posts/${props.id}/editPost`}>
-              <button type="button">Edit post</button>
+            <Link to={`/posts/${props.postId}/comments/${props.id}/editComment`}>
+              <button type="button">Edit Comment</button>
             </Link>
           ) : (
             <div />
           )}
-          <Link to={`/forum/${props.forumid}/posts/${props.id}/comments`}>
-            <button type="button">
-              View comments on this post
-            </button>
-          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default PostList;
+const Post = props => {
+  return (
+    <div className="card Cards">
+      <h1 className="title is-5">Original Post</h1>
+      <div className="card-content is-4by3">
+        <h2 className="card-header-title">{props.name}</h2>
+        <div className="media-content">
+          <div className="content">Posted by: {props.email}</div>
+
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CommentList;
