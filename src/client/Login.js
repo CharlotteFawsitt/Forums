@@ -30,6 +30,7 @@ export default class Login extends Component {
           this.props.handleLogin();
           // redirect to /
           this.props.history.push("/");
+          //This sets the logged in users id and email to the render props.
           this.props.history.state = res.data;
         } else {
           const error = new Error(res.error);

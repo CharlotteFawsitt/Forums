@@ -21,6 +21,8 @@ class App extends Component {
     this.logout = this.logout.bind(this);
     this.login = this.login.bind(this);
 
+    //Checks to see if the loggedIn state is false. If so do the log out call
+    //to clear the token cookie. This stops problems when the page reloads
     if (!this.state.loggedIn) {
       axios
         .get("/api/logout")

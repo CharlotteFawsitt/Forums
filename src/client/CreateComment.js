@@ -8,8 +8,8 @@ class CreateComment extends Component {
     if (this.props.history.state) {
       this.state = {
         name: "",
-        user_id: this.props.history.state._id,
-        user_email: this.props.history.state.email
+        user_id: this.props.history.state._id, //Sets the user id to the current logged in user
+        user_email: this.props.history.state.email //sets the email to the current logged in user email
       };
     } else {
       this.state = { name: "", user_id: "", user_email: "" };
@@ -21,7 +21,7 @@ class CreateComment extends Component {
   handleChange(event) {
     const name = event.target.name;
     const value = event.target.value;
-
+    //If there is a change get the value from the input box and set the state to that input
     this.setState({ name: value });
   }
 

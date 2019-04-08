@@ -40,6 +40,8 @@ class CommentList extends Component {
       });
   }
 
+  //When delete button is pressed this function will make a call to the server to delete the object
+  //from the database then update the page to reflect that change.
   handleDelete(CommentId) {
     axios
       .delete(`/api/posts/${this.props.match.params.id}/comments/delete`, {
@@ -80,6 +82,8 @@ class CommentList extends Component {
     return (
       <div className="column">
         <div>{post}</div>
+        {//If There are no comments then display a title that says no comments
+        }
         {commentList.length ? (
           <div>
             <h2>All Comments</h2>
@@ -110,6 +114,10 @@ const Comment = props => {
         <h2 className="card-header-title">{props.name}</h2>
         <div className="media-content">
           <div className="content">Posted by: {props.email}</div>
+          {
+            //If the current logged in user is the same as the user who posted the comment
+            //then display a delete and edit button
+          }
           {props.uid === props.currentUser ? (
             <button
               className="button is-danger"

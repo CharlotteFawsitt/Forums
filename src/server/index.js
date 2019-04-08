@@ -16,8 +16,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+
+
 mongoose.connect(
-  process.env.mongo_uri,
+  process.env.mongo_uri, //Environment variable set on heroku.
   { useNewUrlParser: true },
   function(err) {
     if (err) {
@@ -189,8 +191,8 @@ app.post("/api/authenticate", function(req, res) {
           const token = jwt.sign(payload, process.env.secret, {
             expiresIn: "1h"
           });
-          res.cookie("token", token, { httpOnly: true });
-          res.status(200).send(user);
+          res.cookie("token", token, { httpOnly: true });//sets the token cookie for login checks
+          res.status(200).send(user); //sends the user object over for current user checks later.
         }
       });
     }
@@ -202,7 +204,7 @@ app.get("/api/checkToken", withAuth, function(req, res) {
 });
 
 app.get("/api/logout", withAuth, function(req, res) {
-  res.cookie("token", "", { httpOnly: true });
+  res.cookie("token", "", { httpOnly: true }); //Clears the token cookie for login checks
   res.status(200).send();
 });
 

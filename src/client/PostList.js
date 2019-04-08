@@ -20,6 +20,9 @@ class PostList extends Component {
       .get(`/api/forum/${this.props.match.params.id}/posts`)
       .then(response => {
         this.setState({ posts: response.data });
+        //This checks to see if the render props state exists set the user id with the current users.
+        //If the state doesn't exist then set the user id to an empty string. Stops problems
+        //arising from undefined and null values
         if (this.props.history.state) {
           this.setState({ user_id: this.props.history.state._id });
         } else {
@@ -94,6 +97,8 @@ const Post = props => {
         <h2 className="card-header-title">{props.name}</h2>
         <div className="media-content">
           <div className="content">Posted by: {props.email}</div>
+          //Like comments checks the logged in user is the same as the posted user and displays
+          //edit and delete buttons
           {props.uid === props.currentUser ? (
             <button
               className="button is-danger"
