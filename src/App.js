@@ -10,7 +10,7 @@ import CommentList from './CommentList';
 import EditPost from './EditPost';
 import EditComment from './EditComment';
 import CreatePost from './CreatePost';
-import createComment from './createComment';
+import CreateComment from './CreateComment';
 import axios from 'axios';
 import './App.css';
 
