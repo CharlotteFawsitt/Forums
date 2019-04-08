@@ -20,6 +20,10 @@ class App extends Component {
     this.state = {loggedIn: false};
     this.logout = this.logout.bind(this);
     this.login = this.login.bind(this);
+
+    if (this.state.loggedIn: false) {
+      logout(this.logout);
+    }
   }
 
 
