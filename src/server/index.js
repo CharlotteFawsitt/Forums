@@ -205,7 +205,5 @@ app.get('/api/logout', withAuth, function(req, res) {
   res.status(200).send()
 });
 
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
+
 app.listen(process.env.PORT || 5000);
