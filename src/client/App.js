@@ -74,7 +74,7 @@ class App extends Component {
                 <Route exact path="/posts/:id/comments/:id/EditComment" component={withAuth(EditComment)} />
                 <Route exact path="/forum/:id/posts/:id/comments" component={CommentList} />
                 <Route exact path="/forum/:id/createPost" component={withAuth(CreatePost)} />
-                <Route exact path="/posts/:id/createComment" component={withAuth(createComment)} />
+                <Route exact path="/posts/:id/createComment" component={withAuth(CreateComment)} />
                 <Route path="/login" render={(props) => <Login {...props} handleLogin={this.login} />} />
                 <Route path="/logout" render={this.logout}/>
               </Switch>
