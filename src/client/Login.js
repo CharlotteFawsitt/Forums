@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email : '',
-      password: ''
+      email: "",
+      password: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -22,13 +22,14 @@ export default class Login extends Component {
 
   onSubmit(event) {
     event.preventDefault();
-    axios.post('/api/authenticate', this.state)
+    axios
+      .post("/api/authenticate", this.state)
       .then(res => {
         if (res.status === 200) {
           // run the login function in the parent component
           this.props.handleLogin();
           // redirect to /
-          this.props.history.push('/');
+          this.props.history.push("/");
           this.props.history.state = res.data;
         } else {
           const error = new Error(res.error);
@@ -37,7 +38,7 @@ export default class Login extends Component {
       })
       .catch(err => {
         console.error(err);
-        alert('Error logging in please try again');
+        alert("Error logging in please try again");
       });
   }
 
@@ -61,7 +62,7 @@ export default class Login extends Component {
           onChange={this.handleInputChange}
           required
         />
-        <input type="submit" value="Submit"/>
+        <input type="submit" value="Submit" />
       </form>
     );
   }

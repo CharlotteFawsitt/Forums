@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 
 export default class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email : '',
-      password: ''
+      email: "",
+      password: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -22,10 +22,11 @@ export default class Register extends Component {
 
   onSubmit(event) {
     event.preventDefault();
-    axios.post('/api/register', this.state)
+    axios
+      .post("/api/register", this.state)
       .then(res => {
         if (res.status === 200) {
-          this.props.history.push('/');
+          this.props.history.push("/");
         } else {
           const error = new Error(res.error);
           throw error;
@@ -33,7 +34,7 @@ export default class Register extends Component {
       })
       .catch(err => {
         console.error(err);
-        alert('Error registering in please try again');
+        alert("Error registering in please try again");
       });
   }
 
@@ -57,7 +58,7 @@ export default class Register extends Component {
           onChange={this.handleInputChange}
           required
         />
-        <input type="submit" value="Submit"/>
+        <input type="submit" value="Submit" />
       </form>
     );
   }

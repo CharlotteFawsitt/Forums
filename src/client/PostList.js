@@ -66,7 +66,9 @@ class PostList extends Component {
           <div>
             <h2>All Posts</h2>
             <Link to={`/forum/${this.props.match.params.id}/createPost`}>
-              <button className="button is-primary" type="button">Create new post</button>
+              <button className="button is-primary" type="button">
+                Create new post
+              </button>
             </Link>
             <div>{postList}</div>
           </div>
@@ -74,7 +76,9 @@ class PostList extends Component {
           <div>
             <h2>No posts</h2>
             <Link to={`/forum/${this.props.match.params.id}/createPost`}>
-              <button className="button is-primary" type="button">Create new post</button>
+              <button className="button is-primary" type="button">
+                Create new post
+              </button>
             </Link>
           </div>
         )}
@@ -91,7 +95,8 @@ const Post = props => {
         <div className="media-content">
           <div className="content">Posted by: {props.email}</div>
           {props.uid === props.currentUser ? (
-            <button className="button is-danger"
+            <button
+              className="button is-danger"
               type="button"
               onClick={() => {
                 props.handleDelete(props.id);
@@ -104,7 +109,9 @@ const Post = props => {
           )}
           {props.uid === props.currentUser ? (
             <Link to={`/forum/${props.forumid}/posts/${props.id}/editPost`}>
-              <button className="button is-info" type="button">Edit post</button>
+              <button className="button is-info" type="button">
+                Edit post
+              </button>
             </Link>
           ) : (
             <div />

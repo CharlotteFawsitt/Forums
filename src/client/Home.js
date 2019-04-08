@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 
 export default class Home extends Component {
   constructor() {
     super();
     this.state = {
-      message: 'Loading...'
+      message: "Loading..."
     };
   }
 
   componentDidMount() {
-    axios.get('/api/home')
-      .then(response => this.setState({message: response.data}));
+    axios
+      .get("/api/home")
+      .then(response => this.setState({ message: response.data }));
   }
 
   render() {
