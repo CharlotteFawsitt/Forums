@@ -11,7 +11,7 @@ render() {
           <p>{this.props.forumName}</p>
 
           <Link to={`/forum/${this.props.id}/posts`}>
-            <button type="button">
+            <button className="button is-primary" type="button">
               View posts on this forum
             </button>
           </Link>

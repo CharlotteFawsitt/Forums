@@ -85,7 +85,7 @@ class CommentList extends Component {
           <div>
             <h2>All Comments</h2>
             <Link to={`/posts/${this.props.match.params.id}/createComment`}>
-              <button type="button">Create new Comment</button>
+              <button className="button is-primary" type="button">Create new Comment</button>
             </Link>
             <div>{commentList}</div>
           </div>
@@ -110,7 +110,7 @@ const Comment = props => {
         <div className="media-content">
           <div className="content">Posted by: {props.email}</div>
           {props.uid === props.currentUser ? (
-            <button
+            <button className="button is-danger"
               type="button"
               onClick={() => {
                 props.handleDelete(props.id);
@@ -123,7 +123,7 @@ const Comment = props => {
           )}
           {props.uid === props.currentUser ? (
             <Link to={`/posts/${props.postId}/comments/${props.id}/editComment`}>
-              <button type="button">Edit Comment</button>
+              <button className="button is-info" type="button">Edit Comment</button>
             </Link>
           ) : (
             <div />
