@@ -1,7 +1,7 @@
 {
   "name": "CA2",
   "version": "1.0.0",
-  "description": "Demo Full Stack MongoDB, Express, React & Node",
+  "description": "Full Stack MongoDB, Express, React & Node",
   "main": "src/server/index.js",
   "scripts": {
     "build": "webpack --mode production",
