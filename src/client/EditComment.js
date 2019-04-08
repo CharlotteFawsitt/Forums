@@ -52,7 +52,7 @@ class EditComment extends Component {
             Comment:
             <input type="text" name="name" value={this.state.name} onChange={this.handleChange} />
           </label>
-          <input type="submit" value="Submit" />
+          <input className="button is-success" type="submit" value="Submit" />
         </form>
       </div>
     );
