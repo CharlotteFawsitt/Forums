@@ -21,13 +21,13 @@ mongoose.connect( process.env.mongo_uri, { useNewUrlParser: true }, function(err
   if (err) {
     throw err;
   } else {
-    console.log(`Successfully connected to ${mongo_uri}`);
+    console.log(`Successfully connected to ${process.env.mongo_uri}`);
   }
 });
 
 app.use(express.static('dist'));
 
-// 
+//
 // app.get('/', function(req, res) {
 //   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 // });
