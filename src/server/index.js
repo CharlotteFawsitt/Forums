@@ -25,12 +25,12 @@ mongoose.connect( process.env.mongo_uri, { useNewUrlParser: true }, function(err
   }
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('dist'));
 
-
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+// 
+// app.get('/', function(req, res) {
+//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// });
 
 app.get('/api/forum', function(req, res){
   Forum.find({}, function(err, data){
