@@ -25,8 +25,12 @@ mongoose.connect( process.env.mongo_uri, { useNewUrlParser: true }, function(err
   }
 });
 
+app.use(express.static(path.join(__dirname, 'public')));
 
 
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 app.get('/api/forum', function(req, res){
   Forum.find({}, function(err, data){
@@ -201,7 +205,5 @@ app.get('/api/logout', withAuth, function(req, res) {
   res.status(200).send()
 });
 
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
+
 app.listen(process.env.PORT || 5000);
