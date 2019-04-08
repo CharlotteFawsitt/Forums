@@ -12,14 +12,12 @@ const withAuth = require('./middleware');
 
 const app = express();
 
-const secret = process.env.secret';
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-const mongo_uri = process.env.mongo_uri;
-mongoose.connect(mongo_uri, { useNewUrlParser: true }, function(err) {
+mongoose.connect( process.env.mongo_uri, { useNewUrlParser: true }, function(err) {
   if (err) {
     throw err;
   } else {
@@ -186,7 +184,7 @@ app.post('/api/authenticate', function(req, res) {
         } else {
           // Issue token
           const payload = { email };
-          const token = jwt.sign(payload, secret, {
+          const token = jwt.sign(payload, process.env.secret, {
             expiresIn: '1h'
           });
           res.cookie('token', token, { httpOnly: true });
