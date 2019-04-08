@@ -22,7 +22,11 @@ class App extends Component {
     this.login = this.login.bind(this);
 
     if (!this.state.loggedIn) {
-      logout(this.logout);
+      axios.get('/api/logout')
+        .then(res =>
+        console.log('token removed');
+      )
+      .catch(err => console.log(err));
     }
   }
 
