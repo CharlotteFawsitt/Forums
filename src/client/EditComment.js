@@ -49,7 +49,7 @@ class EditComment extends Component {
         <h2>Edit comment</h2>
         <form onSubmit={this.handleSubmit}>
           <label>
-            Name:
+            Comment:
             <input type="text" name="name" value={this.state.name} onChange={this.handleChange} />
           </label>
           <input type="submit" value="Submit" />

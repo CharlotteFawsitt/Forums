@@ -49,7 +49,7 @@ class EditPost extends Component {
         <h2>Edit Post</h2>
         <form onSubmit={this.handleSubmit}>
           <label>
-            Name:
+            Post:
             <input type="text" name="name" value={this.state.name} onChange={this.handleChange} />
           </label>
           <input type="submit" value="Submit" />
