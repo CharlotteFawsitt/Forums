@@ -12,13 +12,13 @@ const withAuth = require('./middleware');
 
 const app = express();
 
-const secret = 'secret_should_not_be_in_git';
+const secret = process.env.secret';
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-const mongo_uri = 'mongodb+srv://Charlotte:sk8ingwaskool.@cluster0-gwlvd.gcp.mongodb.net/CA2_users?retryWrites=true';
+const mongo_uri = process.env.mongo_uri;
 mongoose.connect(mongo_uri, { useNewUrlParser: true }, function(err) {
   if (err) {
     throw err;
@@ -207,4 +207,7 @@ app.get('/api/logout', withAuth, function(req, res) {
   res.status(200).send()
 });
 
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 app.listen(process.env.PORT || 5000);
