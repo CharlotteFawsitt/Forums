@@ -65,17 +65,19 @@ class PostList extends Component {
         {postList.length ? (
           <div>
             <h2>All Posts</h2>
+            {props.uid === props.currentUser ? (
             <Link to={`/forum/${this.props.match.params.id}/createPost`}>
               <button className="button is-primary" type="button">Create new post</button>
-            </Link>
+            </Link>) :( <div />)}
             <div>{postList}</div>
           </div>
         ) : (
           <div>
             <h2>No posts</h2>
+            {props.uid === props.currentUser ? (
             <Link to={`/forum/${this.props.match.params.id}/createPost`}>
               <button className="button is-primary" type="button">Create new post</button>
-            </Link>
+            </Link>) :( <div />)}
           </div>
         )}
       </div>
